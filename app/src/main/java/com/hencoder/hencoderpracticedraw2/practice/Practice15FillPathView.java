@@ -42,6 +42,8 @@ public class Practice15FillPathView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        Path realPath = new Path();
 
         // 使用 Paint.getFillPath() 获取实际绘制的 Path
 
@@ -49,10 +51,12 @@ public class Practice15FillPathView extends View {
         paint.setStrokeWidth(0);
         // 第一处：获取 Path
         canvas.drawPath(path, paint);
+        paint.getFillPath(path,realPath);
 
         canvas.save();
         canvas.translate(500, 0);
         canvas.drawPath(path1, pathPaint);
+        paint.getFillPath(path1,realPath);
         canvas.restore();
 
         canvas.save();
@@ -60,23 +64,28 @@ public class Practice15FillPathView extends View {
         paint.setStyle(Paint.Style.STROKE);
         // 第二处：设置 Style 为 STROKE 后再获取 Path
         canvas.drawPath(path, paint);
+        paint.getFillPath(path,realPath);
         canvas.restore();
 
         canvas.save();
         canvas.translate(500, 200);
         canvas.drawPath(path2, pathPaint);
+        paint.getFillPath(path2,realPath);
         canvas.restore();
 
         canvas.save();
         canvas.translate(0, 400);
         paint.setStrokeWidth(40);
+        paint.setStyle(Paint.Style.STROKE);
         // 第三处：Style 为 STROKE 并且线条宽度为 40 时的 Path
         canvas.drawPath(path, paint);
+        paint.getFillPath(path,realPath);
         canvas.restore();
 
         canvas.save();
         canvas.translate(500, 400);
         canvas.drawPath(path3, pathPaint);
+        paint.getFillPath(path3,realPath);
         canvas.restore();
     }
 }
